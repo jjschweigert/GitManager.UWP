@@ -1,0 +1,39 @@
+﻿<Page
+    x:Class="GitManager.UWP.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:GitManager.UWP"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    
+    <Grid>
+        <NavigationView x:Name="MainView_NavigationView"
+                        PaneTitle="Git Manager">
+
+            <NavigationView.AutoSuggestBox>
+                <AutoSuggestBox PlaceholderText="Search"
+                                QueryIcon="Find"/>
+            </NavigationView.AutoSuggestBox>
+            <NavigationView.MenuItems>
+                <NavigationViewItemSeparator/>
+                <NavigationViewItemHeader Content="Management" />
+                <NavigationViewItemSeparator/>
+                <NavigationViewItem Content="Login" Tag="Clone Repositories" Icon="Account"/>
+                <NavigationViewItem Content="Remote Repositories" Icon="World" />
+                <NavigationViewItem Content="Local Commits" Icon="Folder" />
+                <NavigationViewItem Content="Remote Commits" Icon="Globe" />
+                <NavigationViewItem Content="Schedule Sync" Icon="Calendar" />
+                <NavigationViewItemSeparator/>
+                <NavigationViewItemHeader Content="CRUD"/>
+                <NavigationViewItemSeparator/>
+                <NavigationViewItem Content="Create" Icon="Add" />
+                <NavigationViewItem Content="Clone" Icon="Copy" />
+                <NavigationViewItem Content="Delete" Icon="Cancel" />
+                <NavigationViewItem Content="Sync Changes" Icon="Refresh" />
+                <NavigationViewItemSeparator/>
+            </NavigationView.MenuItems>
+        </NavigationView>
+    </Grid>
+</Page>
