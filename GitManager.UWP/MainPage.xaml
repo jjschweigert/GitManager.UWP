@@ -5,25 +5,27 @@
     xmlns:local="using:GitManager.UWP"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:Controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
     
     <Grid>
         <NavigationView x:Name="MainView_NavigationView"
-                        PaneTitle="Git Manager">
-
+                        PaneTitle="Git Manager"
+                        PaneDisplayMode="LeftCompact">
+            
             <NavigationView.AutoSuggestBox>
                 <AutoSuggestBox PlaceholderText="Search"
                                 QueryIcon="Find"/>
             </NavigationView.AutoSuggestBox>
+            
             <NavigationView.MenuItems>
                 <NavigationViewItemSeparator/>
-                <NavigationViewItemHeader Content="Management" />
+                <NavigationViewItemHeader Content="Information" />
                 <NavigationViewItemSeparator/>
-                <NavigationViewItem Content="Login" Tag="Clone Repositories" Icon="Account"/>
-                <NavigationViewItem Content="Remote Repositories" Icon="World" />
-                <NavigationViewItem Content="Local Commits" Icon="Folder" />
-                <NavigationViewItem Content="Remote Commits" Icon="Globe" />
+                <NavigationViewItem Content="Login" Tag="Clone Repositories" Icon="AddFriend"/>
+                <NavigationViewItem Content="Remote" Icon="World" />
+                <NavigationViewItem Content="Local" Icon="Folder" />
                 <NavigationViewItem Content="Schedule Sync" Icon="Calendar" />
                 <NavigationViewItemSeparator/>
                 <NavigationViewItemHeader Content="CRUD"/>
@@ -34,6 +36,13 @@
                 <NavigationViewItem Content="Sync Changes" Icon="Refresh" />
                 <NavigationViewItemSeparator/>
             </NavigationView.MenuItems>
+            
+            <NavigationView.Content>
+                <Grid Tapped="Grid_Tapped">
+                    <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalTextAlignment="Center" TextAlignment="Center" Text="asdfasdfasdfasdf" />
+                </Grid>
+            </NavigationView.Content>
+            
         </NavigationView>
     </Grid>
 </Page>
