@@ -12,7 +12,8 @@
     <Grid>
         <NavigationView x:Name="MainView_NavigationView"
                         PaneTitle="Git Manager"
-                        PaneDisplayMode="LeftCompact">
+                        PaneDisplayMode="LeftCompact"
+                        ItemInvoked="MainView_NavigationView_ItemInvoked">
             
             <NavigationView.AutoSuggestBox>
                 <AutoSuggestBox PlaceholderText="Search"
@@ -23,22 +24,33 @@
                 <NavigationViewItemSeparator/>
                 <NavigationViewItemHeader Content="Information" />
                 <NavigationViewItemSeparator/>
-                <NavigationViewItem Content="Login" Tag="Clone Repositories" Icon="AddFriend"/>
-                <NavigationViewItem Content="Remote" Icon="World" />
-                <NavigationViewItem Content="Local" Icon="Folder" />
-                <NavigationViewItem Content="Schedule Sync" Icon="Calendar" />
-                <NavigationViewItemSeparator/>
-                <NavigationViewItemHeader Content="CRUD"/>
-                <NavigationViewItemSeparator/>
-                <NavigationViewItem Content="Create" Icon="Add" />
-                <NavigationViewItem Content="Clone" Icon="Copy" />
-                <NavigationViewItem Content="Delete" Icon="Cancel" />
-                <NavigationViewItem Content="Sync Changes" Icon="Refresh" />
+                
+                <NavigationViewItem x:Name="Login_NavViewItem" 
+                                    Content="Login" 
+                                    Tag="Clone Repositories" 
+                                    Icon="AddFriend"
+                                    Loaded="NavViewItem_Loaded"/>
+                
+                <NavigationViewItem x:Name="Remote_NavViewItem" 
+                                    Content="Remote" 
+                                    Icon="World"
+                                    Loaded="NavViewItem_Loaded"/>
+                
+                <NavigationViewItem x:Name="Local_NavViewItem" 
+                                    Content="Local" 
+                                    Icon="Folder"
+                                    Loaded="NavViewItem_Loaded"/>
+                
+                <NavigationViewItem x:Name="ScheduleSync_NavViewItem" 
+                                    Content="Schedule Sync" 
+                                    Icon="Calendar"
+                                    Loaded="NavViewItem_Loaded"/>
+                
                 <NavigationViewItemSeparator/>
             </NavigationView.MenuItems>
             
             <NavigationView.Content>
-                <Grid Tapped="Grid_Tapped">
+                <Grid>
                     <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalTextAlignment="Center" TextAlignment="Center" Text="asdfasdfasdfasdf" />
                 </Grid>
             </NavigationView.Content>
