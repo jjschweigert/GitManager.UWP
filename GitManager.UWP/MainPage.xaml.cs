@@ -23,144 +23,47 @@ namespace GitManager.UWP
     /// </summary>
     public sealed partial class MainPage : Page
     {
-        public List<NavigationViewItem> NavigationViewItems { get; set; } = new List<NavigationViewItem>();
-        public Dictionary<NavigationViewItem, Action> NavigationViewItemMapping { get; set; } = new Dictionary<NavigationViewItem, Action>();
-
         public MainPage()
         {
-            this.InitializeComponent();
-
-            var query = from NavigationViewItem obj in MainView_NavigationView.MenuItems
-                        where obj.Name == "SettingsNavPaneItem"
-                        where obj.Content.ToString().ToLower() == "settings"
-                        select obj;
-
-            NavigationViewItem settings = query.FirstOrDefault(null);
-
+            InitializeComponent();
         }
 
         private void MainView_NavigationView_ItemInvoked(NavigationView sender, NavigationViewItemInvokedEventArgs args)
         {
-            NavigationViewItem item = args.InvokedItemContainer as NavigationViewItem;
-            NavigationViewItemMapping[item]();
-        }
-
-        Action NavigationViewItemMapper(NavigationViewItem item)
-        {
-            if(item.Name == Login_NavViewItem.Name)
+            if(args.IsSettingsInvoked)
             {
-                return Login_Clicked;
+                
             }
-
-            else if(item.Name == Remote_NavViewItem.Name)
+            else
             {
-                return Remote_Clicked;
-            }
+                NavigationViewItem item = args.InvokedItemContainer as NavigationViewItem;
 
-            else if(item.Name == Local_NavViewItem.Name)
-            {
-                return Local_Clicked;
-            }
-
-            else if(item.Name == ScheduleSync_NavViewItem.Name)
-            {
-                return ScheduleSync_Clicked;
-            }
-
-            else if(item.Name == "SettingsNavPaneItem")
-            {
-                return Settings_Clicked;
-            }
-
-            return null;
-        }
-
-        private void NavViewItem_Loaded(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                NavigationViewItem item = sender as NavigationViewItem;
-
-                Action action = NavigationViewItemMapper(item);
-
-                if (action != null)
+                switch(item.Content)
                 {
-                    NavigationViewItemMapping.Add(item, action);
-                }
-                else
-                {
-                    NavigationViewItemMapping.Add(item, new Action(async () =>
-                    {
-                        ContentDialog temp = new ContentDialog
-                        {
-                            Content = item.Content,
-                            CloseButtonText = "Ok"
-                        };
+                    case "Login":
+                        ContentFrame.Navigate(typeof(Views.Login));
+                        break;
+                    case "Remote":
+                        ContentFrame.Navigate(typeof(Views.Remote));
+                        break;
 
-                        await Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, async () =>
-                        {
-                            await temp.ShowAsync();
-                        });
-                    }));
+                    case "Local":
+                        ContentFrame.Navigate(typeof(Views.Local));
+                        break;
+
+                    case "Schedule":
+                        ContentFrame.Navigate(typeof(Views.Schedule));
+                        break;
                 }
             }
-            catch
-            { }
         }
 
-        private async void Login_Clicked()
+        private async void MainView_NavigationView_BackRequested(NavigationView sender, NavigationViewBackRequestedEventArgs args)
         {
-            ContentDialog temp = new ContentDialog
-            {
-                Content = "Login d",
-                CloseButtonText = "Ok"
-            };
+            var contentBox = new ContentDialog();
+            contentBox.Content = "Back clicked";
 
-            await temp.ShowAsync();
-        }
-
-        private async void Remote_Clicked()
-        {
-            ContentDialog temp = new ContentDialog
-            {
-                Content = "Remote Repo",
-                CloseButtonText = "Ok"
-            };
-
-            await temp.ShowAsync();
-        }
-
-        private async void Local_Clicked()
-        {
-            ContentDialog temp = new ContentDialog
-            {
-                Content = "Local Repo",
-                CloseButtonText = "Ok"
-            };
-
-            await temp.ShowAsync();
-        }
-
-        private async void ScheduleSync_Clicked()
-        {
-            ContentDialog temp = new ContentDialog
-            {
-                Content = "Schedule Sync",
-                CloseButtonText = "Ok"
-            };
-
-            await temp.ShowAsync();
-        }
-
-        private async void Settings_Clicked()
-        {
-            ContentDialog temp = new ContentDialog
-            {
-                Content = "Settings",
-                CloseButtonText = "Ok"
-            };
-
-            await temp.ShowAsync();
+            await contentBox.ShowAsync();
         }
     }
 }

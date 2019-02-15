@@ -8,53 +8,55 @@
     xmlns:Controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-    
-    <Grid>
-        <NavigationView x:Name="MainView_NavigationView"
+
+    <NavigationView x:Name="MainView_NavigationView"
                         PaneTitle="Git Manager"
                         PaneDisplayMode="LeftCompact"
-                        ItemInvoked="MainView_NavigationView_ItemInvoked">
-            
-            <NavigationView.AutoSuggestBox>
-                <AutoSuggestBox PlaceholderText="Search"
+                        ItemInvoked="MainView_NavigationView_ItemInvoked"
+                        Header="Git Manager"
+                        BackRequested="MainView_NavigationView_BackRequested">
+
+        <NavigationView.AutoSuggestBox>
+            <AutoSuggestBox PlaceholderText="Search"
                                 QueryIcon="Find"/>
-            </NavigationView.AutoSuggestBox>
-            
-            <NavigationView.MenuItems>
-                <NavigationViewItemSeparator/>
-                <NavigationViewItemHeader Content="Information" />
-                <NavigationViewItemSeparator/>
-                
-                <NavigationViewItem x:Name="Login_NavViewItem" 
+        </NavigationView.AutoSuggestBox>
+
+        <NavigationView.MenuItems>
+            <NavigationViewItemSeparator/>
+            <NavigationViewItemHeader Content="Information" />
+            <NavigationViewItemSeparator/>
+
+            <NavigationViewItem x:Name="Login_NavViewItem" 
                                     Content="Login" 
                                     Tag="Clone Repositories" 
-                                    Icon="AddFriend"
-                                    Loaded="NavViewItem_Loaded"/>
-                
-                <NavigationViewItem x:Name="Remote_NavViewItem" 
+                                    Icon="AddFriend"/>
+
+            <NavigationViewItem x:Name="Remote_NavViewItem" 
                                     Content="Remote" 
-                                    Icon="World"
-                                    Loaded="NavViewItem_Loaded"/>
-                
-                <NavigationViewItem x:Name="Local_NavViewItem" 
+                                    Icon="World"/>
+
+            <NavigationViewItem x:Name="Local_NavViewItem" 
                                     Content="Local" 
-                                    Icon="Folder"
-                                    Loaded="NavViewItem_Loaded"/>
-                
-                <NavigationViewItem x:Name="ScheduleSync_NavViewItem" 
-                                    Content="Schedule Sync" 
-                                    Icon="Calendar"
-                                    Loaded="NavViewItem_Loaded"/>
-                
-                <NavigationViewItemSeparator/>
-            </NavigationView.MenuItems>
-            
-            <NavigationView.Content>
+                                    Icon="Folder"/>
+
+            <NavigationViewItem x:Name="Schedule_NavViewItem" 
+                                    Content="Schedule" 
+                                    Icon="Calendar"/>
+
+            <NavigationViewItemSeparator/>
+        </NavigationView.MenuItems>
+
+        <NavigationView.Content>
+            <Frame x:Name="ContentFrame">
+                <Frame.ContentTransitions>
+                    <TransitionCollection>
+                        <NavigationThemeTransition />
+                    </TransitionCollection>
+                </Frame.ContentTransitions>
                 <Grid>
                     <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalTextAlignment="Center" TextAlignment="Center" Text="asdfasdfasdfasdf" />
                 </Grid>
-            </NavigationView.Content>
-            
-        </NavigationView>
-    </Grid>
+            </Frame>
+        </NavigationView.Content>
+    </NavigationView>
 </Page>
