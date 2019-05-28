@@ -7,129 +7,152 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-    <Grid Margin="20"
-          ColumnSpacing="25">
+    <Grid Margin="20, 10, 10, 10"
+          ColumnSpacing="20">
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
             <RowDefinition Height="10*"/>
         </Grid.RowDefinitions>
+
         <Grid.ColumnDefinitions>
-            <ColumnDefinition />
-            <ColumnDefinition />
+            <ColumnDefinition Width="4*"/>
+            <ColumnDefinition Width="6*"/>
         </Grid.ColumnDefinitions>
-        
-        <TextBlock Grid.Row="0" Grid.ColumnSpan="2"  
-                   Text="Local Repository Management"
-                   FontSize="48" />
-        <Grid Grid.Column="0" Grid.Row="1">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-            </Grid.RowDefinitions>
 
-            <MenuBar Grid.Row="0" 
-                     VerticalAlignment="Top">
-                <MenuBarItem Title=""
-                             IsEnabled="False"/>
-            </MenuBar>
+        <TextBlock Grid.Row="0" Grid.ColumnSpan="2"
+                   Text="Local Repo Management"
+                   FontSize="32" />
 
-            <ListView Grid.Row="1">
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <TextBlock Text="{Binding}" />
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-                <ListView.Items>
-                    <ListViewItem>Item 1</ListViewItem>
-                    <ListViewItem>Item 2</ListViewItem>
-                    <ListViewItem>Item 3</ListViewItem>
-                    <ListViewItem>Item 4</ListViewItem>
-                    <ListViewItem>Item 1</ListViewItem>
-                    <ListViewItem>Item 2</ListViewItem>
-                    <ListViewItem>Item 3</ListViewItem>
-                    <ListViewItem>Item 4</ListViewItem>
-                    <ListViewItem>Item 1</ListViewItem>
-                    <ListViewItem>Item 2</ListViewItem>
-                    <ListViewItem>Item 3</ListViewItem>
-                    <ListViewItem>Item 4</ListViewItem>
-                    <ListViewItem>Item 1</ListViewItem>
-                    <ListViewItem>Item 2</ListViewItem>
-                    <ListViewItem>Item 3</ListViewItem>
-                    <ListViewItem>Item 4</ListViewItem>
-                    <ListViewItem>Item 1</ListViewItem>
-                    <ListViewItem>Item 2</ListViewItem>
-                    <ListViewItem>Item 3</ListViewItem>
-                    <ListViewItem>Item 4</ListViewItem>
-                    <ListViewItem>Item 1</ListViewItem>
-                    <ListViewItem>Item 2</ListViewItem>
-                    <ListViewItem>Item 3</ListViewItem>
-                    <ListViewItem>Item 1</ListViewItem>
-                    <ListViewItem>Item 2</ListViewItem>
-                    <ListViewItem>Item 3</ListViewItem>
-                    <ListViewItem>Item 1</ListViewItem>
-                    <ListViewItem>Item 2</ListViewItem>
-                    <ListViewItem>Item 3</ListViewItem>
-                    <ListViewItem>Item 1</ListViewItem>
-                    <ListViewItem>Item 2</ListViewItem>
-                    <ListViewItem>Item 3</ListViewItem>
-                    <ListViewItem>Item 4</ListViewItem>
-                    <ListViewItem>Item 1</ListViewItem>
-                    <ListViewItem>Item 2</ListViewItem>
-                    <ListViewItem>Item 3</ListViewItem>
-                    <ListViewItem>Item 4</ListViewItem>
-                    <ListViewItem>Item 4</ListViewItem>
-                    <ListViewItem>Item 4</ListViewItem>
-                    <ListViewItem>Item 4</ListViewItem>
-                </ListView.Items>
-            </ListView>
-        </Grid>
+        <ListView Grid.Row="1" Grid.Column="0"
+                  IsMultiSelectCheckBoxEnabled="True"
+                  SelectionMode="Extended">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding}" />
+                </DataTemplate>
+            </ListView.ItemTemplate>
+            <ListView.Items>
+                <ListViewItem>Item 1</ListViewItem>
+                <ListViewItem>Item 2</ListViewItem>
+                <ListViewItem>Item 3</ListViewItem>
+                <ListViewItem>Item 4</ListViewItem>
+                <ListViewItem>Item 1</ListViewItem>
+                <ListViewItem>Item 2</ListViewItem>
+                <ListViewItem>Item 3</ListViewItem>
+                <ListViewItem>Item 4</ListViewItem>
+                <ListViewItem>Item 1</ListViewItem>
+                <ListViewItem>Item 2</ListViewItem>
+                <ListViewItem>Item 3</ListViewItem>
+                <ListViewItem>Item 4</ListViewItem>
+                <ListViewItem>Item 1</ListViewItem>
+                <ListViewItem>Item 2</ListViewItem>
+                <ListViewItem>Item 3</ListViewItem>
+                <ListViewItem>Item 4</ListViewItem>
+                <ListViewItem>Item 1</ListViewItem>
+                <ListViewItem>Item 2</ListViewItem>
+                <ListViewItem>Item 3</ListViewItem>
+                <ListViewItem>Item 4</ListViewItem>
+                <ListViewItem>Item 1</ListViewItem>
+                <ListViewItem>Item 2</ListViewItem>
+                <ListViewItem>Item 3</ListViewItem>
+                <ListViewItem>Item 1</ListViewItem>
+                <ListViewItem>Item 2</ListViewItem>
+                <ListViewItem>Item 3</ListViewItem>
+                <ListViewItem>Item 1</ListViewItem>
+                <ListViewItem>Item 2</ListViewItem>
+                <ListViewItem>Item 3</ListViewItem>
+                <ListViewItem>Item 1</ListViewItem>
+                <ListViewItem>Item 2</ListViewItem>
+                <ListViewItem>Item 3</ListViewItem>
+                <ListViewItem>Item 4</ListViewItem>
+                <ListViewItem>Item 1</ListViewItem>
+                <ListViewItem>Item 2</ListViewItem>
+                <ListViewItem>Item 3</ListViewItem>
+                <ListViewItem>Item 4</ListViewItem>
+                <ListViewItem>Item 4</ListViewItem>
+                <ListViewItem>Item 4</ListViewItem>
+                <ListViewItem>Item 4</ListViewItem>
+            </ListView.Items>
+        </ListView>
 
-        <Grid Grid.Column="1" Grid.Row="1">
+        <Grid Grid.Row="1" Grid.Column="1">
             
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
-                <RowDefinition />
+                <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
-            
+
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition />
             </Grid.ColumnDefinitions>
 
-            <Button Grid.Row="0" Grid.Column="0">
-                <Button.ContentTemplate>
-                    <DataTemplate>
-                        <TextBlock Text="Open"
-                                   FontSize="24"/>
-                    </DataTemplate>
-                </Button.ContentTemplate>
-            </Button>
-            <Button Grid.Row="0" Grid.Column="1">
-                <Button.ContentTemplate>
-                    <DataTemplate>
-                        <TextBlock Text="Pull"
-                                   FontSize="24"/>
-                    </DataTemplate>
-                </Button.ContentTemplate>
-            </Button>
-            <Button Grid.Row="0" Grid.Column="2">
-                <Button.ContentTemplate>
-                    <DataTemplate>
-                        <TextBlock Text="Push"
-                                   FontSize="24"/>
-                    </DataTemplate>
-                </Button.ContentTemplate>
-            </Button>
-            <Button Grid.Row="0" Grid.Column="3">
-                <Button.ContentTemplate>
-                    <DataTemplate>
-                        <TextBlock Text="Delete"
-                                   FontSize="24"/>
-                    </DataTemplate>
-                </Button.ContentTemplate>
-            </Button>
+            <Grid Grid.Row="0" Grid.Column="0"
+                  VerticalAlignment="Top">
+                
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+
+                <Button Grid.Row="0" Grid.Column="0">
+                    <Button.ContentTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="Open"
+                                       FontSize="24"
+                                       HorizontalAlignment="Center"
+                                       VerticalAlignment="Center" />
+                        </DataTemplate>
+                    </Button.ContentTemplate>
+                </Button>
+
+                <Button Grid.Row="0" Grid.Column="1">
+                    <Button.ContentTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="Pull"
+                                       FontSize="24"
+                                       HorizontalAlignment="Center"
+                                       VerticalAlignment="Center" />
+                        </DataTemplate>
+                    </Button.ContentTemplate>
+                </Button>
+
+                <Button Grid.Row="0" Grid.Column="2">
+                    <Button.ContentTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="Push"
+                                       FontSize="24"
+                                       HorizontalAlignment="Center"
+                                       VerticalAlignment="Center" />
+                        </DataTemplate>
+                    </Button.ContentTemplate>
+                </Button>
+
+                <Button Grid.Row="0" Grid.Column="3">
+                    <Button.ContentTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="Delete"
+                                       FontSize="24"
+                                       HorizontalAlignment="Center"
+                                       VerticalAlignment="Center" />
+                        </DataTemplate>
+                    </Button.ContentTemplate>
+                </Button>
+            </Grid>
+
+            <Border Grid.Row="1" Grid.Column="0"
+                    Background="LightGreen">
+                <TextBlock Text="Repo Details"
+                           FontSize="32"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center" />
+            </Border>
+            
         </Grid>
     </Grid>
 </Page>
