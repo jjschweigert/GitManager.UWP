@@ -29,6 +29,7 @@ namespace GitManager.UWP
         /// </summary>
         public App()
         {
+            
             this.InitializeComponent();
             this.Suspending += OnSuspending;
         }

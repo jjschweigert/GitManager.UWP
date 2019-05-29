@@ -22,9 +22,29 @@ namespace GitManager.UWP.Views
     /// </summary>
     public sealed partial class Local : Page
     {
+        public List<RepoListViewItem> RepoListViewItems { get; set;}
         public Local()
         {
+            RepoListViewItems = new List<RepoListViewItem>();
+
+            for(int i = 0; i < 30; i++)
+            {
+                RepoListViewItems.Add(new RepoListViewItem
+                {
+                    Title = "Current Index Is " + i.ToString(),
+                    Text = "Next Index Is " + (i + 1).ToString()
+                });
+            }
+
             this.InitializeComponent();
+            this.DataContext = this;
         }
+    }
+
+    [Bindable]
+    public class RepoListViewItem
+    {
+        public string Title { get; set; }
+        public string Text { get; set; }
     }
 }

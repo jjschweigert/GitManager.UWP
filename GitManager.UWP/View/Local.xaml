@@ -25,54 +25,18 @@
 
         <ListView Grid.Row="1" Grid.Column="0"
                   IsMultiSelectCheckBoxEnabled="True"
-                  SelectionMode="Extended">
+                  SelectionMode="Extended"
+                  ItemsSource="{Binding RepoListViewItems}">
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <TextBlock Text="{Binding}" />
+                    <StackPanel>
+                        <TextBlock Text="{Binding Title}"
+                                   FontSize="24"/>
+                        <TextBlock Text="{Binding Text}" 
+                                   FontSize="14"/>
+                    </StackPanel>
                 </DataTemplate>
             </ListView.ItemTemplate>
-            <ListView.Items>
-                <ListViewItem>Item 1</ListViewItem>
-                <ListViewItem>Item 2</ListViewItem>
-                <ListViewItem>Item 3</ListViewItem>
-                <ListViewItem>Item 4</ListViewItem>
-                <ListViewItem>Item 1</ListViewItem>
-                <ListViewItem>Item 2</ListViewItem>
-                <ListViewItem>Item 3</ListViewItem>
-                <ListViewItem>Item 4</ListViewItem>
-                <ListViewItem>Item 1</ListViewItem>
-                <ListViewItem>Item 2</ListViewItem>
-                <ListViewItem>Item 3</ListViewItem>
-                <ListViewItem>Item 4</ListViewItem>
-                <ListViewItem>Item 1</ListViewItem>
-                <ListViewItem>Item 2</ListViewItem>
-                <ListViewItem>Item 3</ListViewItem>
-                <ListViewItem>Item 4</ListViewItem>
-                <ListViewItem>Item 1</ListViewItem>
-                <ListViewItem>Item 2</ListViewItem>
-                <ListViewItem>Item 3</ListViewItem>
-                <ListViewItem>Item 4</ListViewItem>
-                <ListViewItem>Item 1</ListViewItem>
-                <ListViewItem>Item 2</ListViewItem>
-                <ListViewItem>Item 3</ListViewItem>
-                <ListViewItem>Item 1</ListViewItem>
-                <ListViewItem>Item 2</ListViewItem>
-                <ListViewItem>Item 3</ListViewItem>
-                <ListViewItem>Item 1</ListViewItem>
-                <ListViewItem>Item 2</ListViewItem>
-                <ListViewItem>Item 3</ListViewItem>
-                <ListViewItem>Item 1</ListViewItem>
-                <ListViewItem>Item 2</ListViewItem>
-                <ListViewItem>Item 3</ListViewItem>
-                <ListViewItem>Item 4</ListViewItem>
-                <ListViewItem>Item 1</ListViewItem>
-                <ListViewItem>Item 2</ListViewItem>
-                <ListViewItem>Item 3</ListViewItem>
-                <ListViewItem>Item 4</ListViewItem>
-                <ListViewItem>Item 4</ListViewItem>
-                <ListViewItem>Item 4</ListViewItem>
-                <ListViewItem>Item 4</ListViewItem>
-            </ListView.Items>
         </ListView>
 
         <Grid Grid.Row="1" Grid.Column="1">

@@ -6,6 +6,7 @@ using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Popups;
+using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -28,11 +29,18 @@ namespace GitManager.UWP
             InitializeComponent();
         }
 
-        private void MainView_NavigationView_ItemInvoked(NavigationView sender, NavigationViewItemInvokedEventArgs args)
+        private async void MainView_NavigationView_ItemInvoked(NavigationView sender, NavigationViewItemInvokedEventArgs args)
         {
             if(args.IsSettingsInvoked)
             {
-                
+                ContentDialog test = new ContentDialog
+                {
+                    Title = "Settings",
+                    Content = "Was clicked.",
+                    PrimaryButtonText = "Ok"
+                };
+
+                await test.ShowAsync();
             }
             else
             {
