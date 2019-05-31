@@ -5,24 +5,27 @@
     xmlns:local="using:GitManager.UWP.Views"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-    <Grid Margin="20, 10, 10, 10"
-          ColumnSpacing="20">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="10*"/>
-        </Grid.RowDefinitions>
 
+    <Grid Margin="20, 10, 10, 10"
+          ColumnSpacing="10">
+        <Grid.RowDefinitions>
+            <RowDefinition MinHeight="25" Height="*" />
+            <RowDefinition MinHeight="100" Height="10*"/>
+        </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="4*"/>
-            <ColumnDefinition Width="6*"/>
+            <ColumnDefinition MinWidth="800" Width="*" />
+            <ColumnDefinition MinWidth="20" Width="20"/>
+            <ColumnDefinition MinWidth="1200" Width="*" />
         </Grid.ColumnDefinitions>
 
-        <TextBlock Grid.Row="0" Grid.ColumnSpan="2"
+        <TextBlock Grid.Row="0" Grid.ColumnSpan="3"
                    Text="Local Repo Management"
                    FontSize="32" />
 
+        <!--Column Grid Splitter-->
         <ListView Grid.Row="1" Grid.Column="0"
                   IsMultiSelectCheckBoxEnabled="True"
                   SelectionMode="Extended"
@@ -32,15 +35,29 @@
                     <StackPanel>
                         <TextBlock Text="{Binding Title}"
                                    FontSize="24"/>
-                        <TextBlock Text="{Binding Text}" 
+                        <TextBlock Text="{Binding Text}"
                                    FontSize="14"/>
                     </StackPanel>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
 
-        <Grid Grid.Row="1" Grid.Column="1">
-            
+        <controls:GridSplitter Grid.Row="1" Grid.Column="1"
+                               ResizeBehavior="BasedOnAlignment"
+                               ResizeDirection="Auto"
+                               Background="Gray"
+                               Foreground="White" FontSize="13">
+            <controls:GridSplitter.Element>
+                <Grid>
+                    <TextBlock HorizontalAlignment="Center" IsHitTestVisible="False" VerticalAlignment="Center"
+                               Text="&#xE784;" Foreground="Black" FontFamily="Segoe MDL2 Assets">
+                    </TextBlock>
+                </Grid>
+            </controls:GridSplitter.Element>
+        </controls:GridSplitter>
+
+        <Grid Grid.Row="1" Grid.Column="2">
+
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="*"/>
@@ -52,7 +69,7 @@
 
             <Grid Grid.Row="0" Grid.Column="0"
                   VerticalAlignment="Top">
-                
+
                 <Grid.RowDefinitions>
                     <RowDefinition />
                 </Grid.RowDefinitions>
@@ -109,14 +126,13 @@
                 </Button>
             </Grid>
 
-            <Border Grid.Row="1" Grid.Column="0"
-                    Background="LightGreen">
+            <Frame Grid.Row="1" Grid.Column="0">
                 <TextBlock Text="Repo Details"
                            FontSize="32"
                            HorizontalAlignment="Center"
                            VerticalAlignment="Center" />
-            </Border>
-            
+            </Frame>
+
         </Grid>
     </Grid>
 </Page>
