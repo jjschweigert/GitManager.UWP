@@ -9,16 +9,18 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <Grid Margin="20, 10, 10, 10"
-          ColumnSpacing="10">
+    <Grid x:Name="ViewRoot"
+          Margin="20, 10, 10, 10"
+          ColumnSpacing="10"
+          ManipulationCompleted="Grid_ManipulationCompleted">
         <Grid.RowDefinitions>
             <RowDefinition MinHeight="25" Height="*" />
             <RowDefinition MinHeight="100" Height="10*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition MinWidth="800" Width="*" />
+            <ColumnDefinition MinWidth="500" Width="{Binding RepoListView_Width}" />
             <ColumnDefinition MinWidth="20" Width="20"/>
-            <ColumnDefinition MinWidth="1200" Width="*" />
+            <ColumnDefinition MinWidth="900" Width="{Binding RepoDetailView_Width}" />
         </Grid.ColumnDefinitions>
 
         <TextBlock Grid.Row="0" Grid.ColumnSpan="3"
@@ -27,15 +29,20 @@
 
         <!--Column Grid Splitter-->
         <ListView Grid.Row="1" Grid.Column="0"
+                  x:Name="RepoListView"
                   IsMultiSelectCheckBoxEnabled="True"
                   SelectionMode="Extended"
-                  ItemsSource="{Binding RepoListViewItems}">
+                  ItemsSource="{Binding RepoListViewItems}"
+                  CacheMode="BitmapCache"
+                  IsRightTapEnabled="True"
+                  IsSwipeEnabled="True"
+                  IsItemClickEnabled="True">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <StackPanel>
                         <TextBlock Text="{Binding Title}"
                                    FontSize="24"/>
-                        <TextBlock Text="{Binding Text}"
+                        <TextBlock Text="{Binding Detail}"
                                    FontSize="14"/>
                     </StackPanel>
                 </DataTemplate>
@@ -81,7 +88,9 @@
                     <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
 
-                <Button Grid.Row="0" Grid.Column="0">
+                <Button Grid.Row="0" Grid.Column="0"
+                        x:Name="Open_Button"
+                        Click="Open_Button_Click">
                     <Button.ContentTemplate>
                         <DataTemplate>
                             <TextBlock Text="Open"

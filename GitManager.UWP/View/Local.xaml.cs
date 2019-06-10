@@ -1,8 +1,12 @@
-﻿using System;
+﻿using GitManager.UWP.Model;
+using GitManager.UWP.ViewModel;
+using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Windows.Input;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
@@ -22,29 +26,42 @@ namespace GitManager.UWP.Views
     /// </summary>
     public sealed partial class Local : Page
     {
-        public List<RepoListViewItem> RepoListViewItems { get; set;}
+        public Action OpenSelectedRepos { get; set; }
+
         public Local()
         {
-            RepoListViewItems = new List<RepoListViewItem>();
+            this.InitializeComponent();
+            this.DataContext = PageViewModel_Manager.LocalView;
+        }
 
-            for(int i = 0; i < 30; i++)
+        private void Grid_ManipulationCompleted(object sender, ManipulationCompletedRoutedEventArgs e)
+        {
+            PageViewModel_Manager.LocalView.RepoListView_Width = ViewRoot.ColumnDefinitions[0].Width;
+            PageViewModel_Manager.LocalView.RepoDetailView_Width = ViewRoot.ColumnDefinitions[2].Width;
+        }
+
+        private async void Show_Message(string title, string content)
+        {
+            ContentDialog dialog = new ContentDialog
             {
-                RepoListViewItems.Add(new RepoListViewItem
-                {
-                    Title = "Current Index Is " + i.ToString(),
-                    Text = "Next Index Is " + (i + 1).ToString()
-                });
+                Title = title,
+                Content = content,
+                CloseButtonText = "Ok"
+            };
+
+            await dialog.ShowAsync();
+        }
+
+        private void Open_Button_Click(object sender, RoutedEventArgs e)
+        {
+            string temp = string.Empty;
+
+            foreach(LocalView_RepoListViewItem_Model item in RepoListView.SelectedItems)
+            {
+                temp += item.Title + "\n";
             }
 
-            this.InitializeComponent();
-            this.DataContext = this;
+            Show_Message("Open Clicked", temp);
         }
-    }
-
-    [Bindable]
-    public class RepoListViewItem
-    {
-        public string Title { get; set; }
-        public string Text { get; set; }
     }
 }

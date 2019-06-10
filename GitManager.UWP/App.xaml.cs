@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GitManager.UWP.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -29,7 +30,7 @@ namespace GitManager.UWP
         /// </summary>
         public App()
         {
-            
+
             this.InitializeComponent();
             this.Suspending += OnSuspending;
         }
@@ -101,4 +102,5 @@ namespace GitManager.UWP
             deferral.Complete();
         }
     }
+
 }
