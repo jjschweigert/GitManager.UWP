@@ -8,9 +8,13 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <Grid>
-        <TextBlock HorizontalAlignment="Center"
-                   VerticalAlignment="Center"
-                   Text="Settings" />
-    </Grid>
+    <StackPanel Orientation="Vertical" Spacing="15">
+        <TextBlock x:Name="DatabasePathLabel" />
+        <TextBlock Text="Path"/>
+        <TextBox x:Name="path" />
+        <Button Content="Add" Click="Button_Click" />
+        <Button Content="Delete" Click="Button_Click_1" />
+        <Button Content="Open DB Location" Click="Button_Click_2" />
+        <ListView x:Name="stores" />
+    </StackPanel>
 </Page>

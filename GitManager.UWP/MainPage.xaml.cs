@@ -14,6 +14,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using DataAccessLibrary;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
@@ -29,18 +30,11 @@ namespace GitManager.UWP
             InitializeComponent();
         }
 
-        private async void MainView_NavigationView_ItemInvoked(NavigationView sender, NavigationViewItemInvokedEventArgs args)
+        private void MainView_NavigationView_ItemInvoked(NavigationView sender, NavigationViewItemInvokedEventArgs args)
         {
             if(args.IsSettingsInvoked)
             {
-                ContentDialog test = new ContentDialog
-                {
-                    Title = "Settings",
-                    Content = "Was clicked.",
-                    PrimaryButtonText = "Ok"
-                };
-
-                await test.ShowAsync();
+                ContentFrame.Navigate(typeof(Views.Settings));
             }
             else
             {

@@ -16,6 +16,9 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using DataAccessLibrary;
+using System.Reflection;
+using Windows.Storage;
 
 namespace GitManager.UWP
 {
@@ -74,6 +77,27 @@ namespace GitManager.UWP
                 // Ensure the current window is active
                 Window.Current.Activate();
             }
+
+            string AppData = ApplicationData.Current.RoamingFolder.Path;
+            string AppName = Assembly.GetExecutingAssembly().GetName().Name;
+            string AppVersion = Assembly.GetExecutingAssembly().GetName().Version.ToString();
+
+            string DatabasePath = AppData + @"\" + AppName + @"\" + AppVersion;
+
+            if (!Directory.Exists(DatabasePath))
+            {
+                try
+                {
+                    Directory.CreateDirectory(DatabasePath);
+                }
+                catch(Exception ex)
+                {
+                    CoreApplication.Exit();
+                }
+            }
+
+            DataAccess.InitializeDatabase(DatabasePath + @"\Stores", "StoreDirectories");
+            StoreDirectories.Stores = DataAccess.GetStores().Result;
 
             CoreApplication.GetCurrentView().TitleBar.ExtendViewIntoTitleBar = true;
         }
