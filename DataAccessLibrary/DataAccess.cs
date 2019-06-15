@@ -10,27 +10,18 @@ namespace DataAccessLibrary
 {
     public static class DataAccess
     {
-        private static string _Filename { get; set; }
-        private static string _Table { get; set; }
-
-        /// <summary>
-        /// Initializes a database located in a file given by Filename if not exists. Then a table called Table is created under the database if not exists.
-        /// </summary>
-        /// <param name="Filename">The filename to store the database in.</param>
-        /// <param name="Table">The name of the table to create in the database</param>
-        public static async void InitializeDatabase(string Filename, string Table)
+        public static async void InitializeDatabase(string DatabasePath, string CreateTableCommand)
         {
-            _Filename = Filename;
-            _Table = Table;
-
-            using (SqliteConnection db = new SqliteConnection("Data Source="+_Filename+".db"))
+            /*
+             * CREATE TABLE IF NOT EXISTS <TABLE>
+             * (Primary_Key INTEGER PRIMARY KEY,
+             * <ColumnName> <DataType> <Default Value>,
+             * ....
+             * )
+             *
+             */
+            using (SqliteConnection db = new SqliteConnection("Data Source="+ DatabasePath))
             {
-                /*
-                 * Table
-                 *
-                 * Store Directory - text
-                 *
-                 */
                 try
                 {
                     db.Open();
@@ -40,20 +31,20 @@ namespace DataAccessLibrary
                     return;
                 }
 
-                string tableCommand = "CREATE TABLE IF NOT EXISTS " + _Table
-                                    + " (Primary_Key INTEGER PRIMARY KEY, "
-                                    + "StoreDir TEXT NOT NULL DEFAULT '')";
+                //string tableCommand = "CREATE TABLE IF NOT EXISTS " + Table
+                //                    + " (Primary_Key INTEGER PRIMARY KEY, "
+                //                    + "StoreDir TEXT NOT NULL DEFAULT '')";
 
-                SqliteCommand createTable = new SqliteCommand(tableCommand, db);
+                SqliteCommand createTable = new SqliteCommand(CreateTableCommand, db);
                 await createTable.ExecuteReaderAsync();
 
                 db.Close();
             }
         }
 
-        public static async void AddData(string StoreDir)
+        public static async void AddData(string DatabasePath, string AddDataCommand, Dictionary<string, string> Arguments)
         {
-            using(SqliteConnection db = new SqliteConnection("Filename="+_Filename+".db"))
+            using(SqliteConnection db = new SqliteConnection("Filename=" + DatabasePath))
             {
                 db.Open();
 
@@ -62,10 +53,16 @@ namespace DataAccessLibrary
                     Connection = db,
 
                     // Use parameterized query to prevent SQL injection attacks
-                    CommandText = "INSERT INTO " + _Table + " VALUES " +
-                                            "(NULL, @Path);"
+                    //CommandText = "INSERT INTO " + _Table + " VALUES " +
+                    //                        "(NULL, @Path);"
                 };
-                insertCommand.Parameters.AddWithValue("@Path", StoreDir);
+
+                insertCommand.CommandText = AddDataCommand;
+
+                foreach(KeyValuePair<string, string> kvp in Arguments)
+                {
+                    insertCommand.Parameters.AddWithValue("@" + kvp.Key, kvp.Value);
+                }
 
                 await insertCommand.ExecuteReaderAsync();
 
@@ -73,18 +70,29 @@ namespace DataAccessLibrary
             }
         }
 
-        public static async Task<List<string>> GetStores()
+        public static async Task<List<string>> GetData(string DatabasePath, string GetDataCommand, Dictionary<string, string> Arguments)
         {
             List<string> StoreDirs = new List<string>();
 
-            using(SqliteConnection db = new SqliteConnection("Filename="+_Filename+".db"))
+            using(SqliteConnection db = new SqliteConnection("Filename="+ DatabasePath))
             {
                 db.Open();
 
-                string selectCommand = "SELECT StoreDir FROM " + _Table;
-                SqliteCommand selectRow = new SqliteCommand(selectCommand, db);
+                //string selectCommand = "SELECT StoreDir FROM " + _Table;
+                //SqliteCommand selectRow = new SqliteCommand(selectCommand, db);
+                SqliteCommand selectCommand = new SqliteCommand
+                {
+                    Connection = db
+                };
 
-                SqliteDataReader query = await selectRow.ExecuteReaderAsync();
+                selectCommand.CommandText = GetDataCommand;
+
+                foreach (KeyValuePair<string, string> kvp in Arguments)
+                {
+                    selectCommand.Parameters.AddWithValue("@" + kvp.Key, kvp.Value);
+                }
+
+                SqliteDataReader query = await selectCommand.ExecuteReaderAsync();
 
                 while(await query.ReadAsync())
                 {
@@ -97,31 +105,25 @@ namespace DataAccessLibrary
             return StoreDirs;
         }
 
-        public static async Task<bool> DeleteStores(List<string> Stores)
+        public static async Task<bool> DeleteData(string DatabasePath, string DeleteDataCommand, Dictionary<string, string> Arguments)
         {
-            using (SqliteConnection db = new SqliteConnection("Filename=" + _Filename + ".db"))
+            using (SqliteConnection db = new SqliteConnection("Filename=" + DatabasePath))
             {
                 db.Open();
 
-                SqliteCommand insertCommand = new SqliteCommand
+                SqliteCommand deleteCommand = new SqliteCommand
                 {
                     Connection = db
                 };
 
-                if (Stores != null && Stores.Count > 0)
+                deleteCommand.CommandText = DeleteDataCommand;
+
+                foreach (KeyValuePair<string, string> kvp in Arguments)
                 {
-                    foreach (string store in Stores)
-                    {
-                        insertCommand.CommandText = "DELETE FROM " + _Table + " WHERE StoreDir = @dir";
-                        insertCommand.Parameters.AddWithValue("@dir", store);
-                        await insertCommand.ExecuteNonQueryAsync();
-                    }
+                    deleteCommand.Parameters.AddWithValue("@" + kvp.Key, kvp.Value);
                 }
-                else
-                {
-                    insertCommand.CommandText = "DELETE FROM " + _Table + ";";
-                    await insertCommand.ExecuteNonQueryAsync();
-                }
+
+                await deleteCommand.ExecuteNonQueryAsync();
 
                 db.Close();
             }

@@ -28,7 +28,7 @@ namespace GitManager.UWP.Views
         public Settings()
         {
             this.InitializeComponent();
-            stores.ItemsSource = StoreDirectories.Stores;
+
             string AppData = ApplicationData.Current.RoamingFolder.Path;
             string AppName = Assembly.GetExecutingAssembly().GetName().Name;
             string AppVersion = Assembly.GetExecutingAssembly().GetName().Version.ToString();
@@ -39,42 +39,61 @@ namespace GitManager.UWP.Views
 
         private async void Button_Click(object sender, RoutedEventArgs e)
         {
-            if(!string.IsNullOrEmpty(path.Text) && !string.IsNullOrWhiteSpace(path.Text))
+            var folderpicker = new Windows.Storage.Pickers.FolderPicker();
+            folderpicker.SuggestedStartLocation = Windows.Storage.Pickers.PickerLocationId.ComputerFolder;
+            folderpicker.FileTypeFilter.Add("*");
+
+            Windows.Storage.StorageFolder folder = await folderpicker.PickSingleFolderAsync();
+
+            string pathstr = folder.Path;
+
+            Windows.Storage.StorageFile file = await folder.CreateFileAsync("sample.txt", CreationCollisionOption.GenerateUniqueName);
+
+            List<string> output = new List<string>();
+
+            foreach(StorageFile sfile in await folder.GetFilesAsync())
             {
-                string Path = path.Text;
-                DataAccess.AddData(Path);
-                StoreDirectories.Stores = await DataAccess.GetStores();
-                stores.ItemsSource = StoreDirectories.Stores;
+                output.Add(sfile.Name + "\n");
+            }
+
+            stores.ItemsSource = output;
+
+            if (!string.IsNullOrEmpty(path.Text) && !string.IsNullOrWhiteSpace(path.Text))
+            {
+                //string Path = path.Text;
+                //DataAccess.AddData(Path);
+                //StoreDirectories.Stores = await DataAccess.GetStores();
+                //stores.ItemsSource = StoreDirectories.Stores;
             }
         }
 
         private async void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            if (!string.IsNullOrEmpty(path.Text) && !string.IsNullOrWhiteSpace(path.Text))
-            {
-                string Path = path.Text;
-                await DataAccess.DeleteStores(new List<string> { Path });
-                StoreDirectories.Stores = await DataAccess.GetStores();
-                stores.ItemsSource = StoreDirectories.Stores;
-            }
-            else
-            {
-                await DataAccess.DeleteStores(null);
-                StoreDirectories.Stores = await DataAccess.GetStores();
-                stores.ItemsSource = StoreDirectories.Stores;
-            }
+            //if (!string.IsNullOrEmpty(path.Text) && !string.IsNullOrWhiteSpace(path.Text))
+            //{
+            //    string Path = path.Text;
+            //    await DataAccess.DeleteStores(new List<string> { Path });
+            //    StoreDirectories.Stores = await DataAccess.GetStores();
+            //    stores.ItemsSource = StoreDirectories.Stores;
+            //}
+            //else
+            //{
+            //    await DataAccess.DeleteStores(null);
+            //    StoreDirectories.Stores = await DataAccess.GetStores();
+            //    stores.ItemsSource = StoreDirectories.Stores;
+            //}
         }
 
         private async void Button_Click_2(object sender, RoutedEventArgs e)
         {
-            string AppData = ApplicationData.Current.RoamingFolder.Path;
-            string AppName = Assembly.GetExecutingAssembly().GetName().Name;
-            string AppVersion = Assembly.GetExecutingAssembly().GetName().Version.ToString();
+            //string AppData = ApplicationData.Current.RoamingFolder.Path;
+            //string AppName = Assembly.GetExecutingAssembly().GetName().Name;
+            //string AppVersion = Assembly.GetExecutingAssembly().GetName().Version.ToString();
 
-            string DatabasePath = AppData + @"\" + AppName + @"\" + AppVersion;
+            //string DatabasePath = AppData + @"\" + AppName + @"\" + AppVersion;
 
-            StorageFolder folder = await StorageFolder.GetFolderFromPathAsync(DatabasePath);
-            await Windows.System.Launcher.LaunchFolderAsync(folder);
+            //StorageFolder folder = await StorageFolder.GetFolderFromPathAsync(DatabasePath);
+            //await Windows.System.Launcher.LaunchFolderAsync(folder);
         }
     }
 }

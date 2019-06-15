@@ -96,8 +96,8 @@ namespace GitManager.UWP
                 }
             }
 
-            DataAccess.InitializeDatabase(DatabasePath + @"\Stores", "StoreDirectories");
-            StoreDirectories.Stores = DataAccess.GetStores().Result;
+            //DataAccess.InitializeDatabase(DatabasePath + @"\Stores", "StoreDirectories");
+            //StoreDirectories.Stores = DataAccess.GetStores().Result;
 
             CoreApplication.GetCurrentView().TitleBar.ExtendViewIntoTitleBar = true;
         }

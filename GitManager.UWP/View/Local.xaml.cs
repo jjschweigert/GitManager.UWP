@@ -31,13 +31,13 @@ namespace GitManager.UWP.Views
         public Local()
         {
             this.InitializeComponent();
-            this.DataContext = PageViewModel_Manager.LocalView;
+            //this.DataContext = PageViewModel_Manager.LocalView;
         }
 
         private void Grid_ManipulationCompleted(object sender, ManipulationCompletedRoutedEventArgs e)
         {
-            PageViewModel_Manager.LocalView.RepoListView_Width = ViewRoot.ColumnDefinitions[0].Width;
-            PageViewModel_Manager.LocalView.RepoDetailView_Width = ViewRoot.ColumnDefinitions[2].Width;
+            //PageViewModel_Manager.LocalView.RepoListView_Width = ViewRoot.ColumnDefinitions[0].Width;
+            //PageViewModel_Manager.LocalView.RepoDetailView_Width = ViewRoot.ColumnDefinitions[2].Width;
         }
 
         private async void Show_Message(string title, string content)
